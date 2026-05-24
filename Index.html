@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oluwatoyin Sangotade — Customer Support Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0b2040;
+    --blue:   #1a5276;
+    --sky:    #2e86c1;
+    --teal:   #1abc9c;
+    --gold:   #d4a017;
+    --cream:  #f8f5f0;
+    --warm:   #edeae4;
+    --white:  #ffffff;
+    --text:   #1c1c2e;
+    --muted:  #6c7a8d;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* grain overlay */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 5rem;
+    background: rgba(248,245,240,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(11,32,64,0.07);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--navy); letter-spacing: 0.03em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy); color: var(--white);
+    padding: 0.55rem 1.4rem; border-radius: 2px;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 55% 45%;
+    padding-top: 72px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--navy);
+    padding: 6rem 5rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  /* decorative circles */
+  .hero-left::before {
+    content: '';
+    position: absolute; bottom: -120px; left: -120px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    border: 60px solid rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 40px solid rgba(212,160,23,0.08);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .eyebrow-line { width: 32px; height: 2px; background: var(--gold); }
+  .eyebrow-text {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 4.5vw, 5rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--white);
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero-name em { font-style: italic; color: var(--gold); }
+
+  .hero-role {
+    margin-top: 1.2rem;
+    font-size: 1rem; font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-summary {
+    margin-top: 2rem;
+    font-size: 0.92rem; line-height: 1.8; font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    max-width: 420px;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+
+  .hero-actions {
+    margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 2px; border: none; cursor: pointer;
+    font-family: 'Outfit', sans-serif; font-size: 0.8rem;
+    font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-gold { background: var(--gold); color: var(--white); }
+  .btn-gold:hover { background: #c4910f; transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+  /* Hero right — stats */
+  .hero-right {
+    background: var(--warm);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 5rem; gap: 3rem;
+  }
+
+  .stat-item { opacity: 0; animation: fadeUp 0.6s forwards; }
+  .stat-item:nth-child(1) { animation-delay: 0.5s; }
+  .stat-item:nth-child(2) { animation-delay: 0.65s; }
+  .stat-item:nth-child(3) { animation-delay: 0.8s; }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 700; line-height: 1;
+    color: var(--navy);
+  }
+  .stat-number sup { font-size: 1.8rem; color: var(--gold); }
+  .stat-label {
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-top: 0.4rem;
+  }
+  .stat-track {
+    margin-top: 0.9rem; height: 3px;
+    background: rgba(11,32,64,0.1); border-radius: 10px;
+    width: 200px; overflow: hidden;
+  }
+  .stat-fill {
+    height: 100%; border-radius: 10px; width: 0;
+    background: linear-gradient(90deg, var(--sky), var(--teal));
+    transition: width 1.6s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── SECTION COMMONS ── */
+  .section { padding: 7rem 5rem; }
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;
+  }
+  .section-eyebrow-line { width: 24px; height: 2px; background: var(--gold); }
+  .section-eyebrow-text {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700; color: var(--navy); line-height: 1.2;
+  }
+  .section-header { margin-bottom: 4rem; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    gap: 6rem; align-items: center;
+  }
+  .about-visual { position: relative; }
+  .about-card {
+    background: var(--navy);
+    border-radius: 3px; padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    aspect-ratio: 4/5;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .about-card-monogram {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11rem; font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -0.05em; pointer-events: none;
+    white-space: nowrap;
+  }
+  .about-card-badge {
+    background: var(--gold); color: var(--white);
+    display: inline-block; padding: 0.5rem 1.2rem;
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border-radius: 2px; position: relative; z-index: 1;
+    width: fit-content;
+  }
+  .about-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-top: 0.8rem; position: relative; z-index: 1;
+  }
+  .about-deco {
+    position: absolute; top: -20px; right: -20px;
+    width: 90px; height: 90px;
+    border: 2px solid var(--gold); border-radius: 2px; opacity: 0.3;
+  }
+  .about-deco2 {
+    position: absolute; bottom: -15px; left: -15px;
+    width: 60px; height: 60px;
+    border: 2px solid var(--sky); border-radius: 2px; opacity: 0.2;
+  }
+
+  .about-body p {
+    font-size: 1rem; line-height: 1.9; color: #404060;
+    margin-bottom: 1.4rem; font-weight: 300;
+  }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .about-tag {
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(11,32,64,0.15);
+    border-radius: 100px; font-size: 0.78rem;
+    color: var(--blue); font-weight: 500;
+    transition: all 0.2s;
+  }
+  .about-tag:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--cream); }
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid; grid-template-columns: 220px 1fr;
+    gap: 4rem; padding: 3.5rem 0;
+    border-bottom: 1px solid rgba(11,32,64,0.07);
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .exp-item.visible { opacity: 1; transform: none; }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-side { padding-top: 4px; }
+  .exp-period {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold);
+  }
+  .exp-co {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--navy); margin-top: 0.5rem; line-height: 1.3;
+  }
+  .exp-industry {
+    font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .exp-industry::before {
+    content: ''; width: 5px; height: 5px;
+    background: var(--teal); border-radius: 50; flex-shrink: 0;
+  }
+
+  .exp-main-title {
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 1.2rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .exp-bullets li {
+    font-size: 0.9rem; line-height: 1.75;
+    color: #404060; padding-left: 1.3rem; position: relative; font-weight: 300;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute;
+    left: 0; top: 0.65em;
+    width: 5px; height: 5px;
+    background: var(--sky); border-radius: 50%;
+  }
+  .exp-tool-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.3rem; }
+  .exp-tool-tag {
+    padding: 0.25rem 0.8rem;
+    background: rgba(46,134,193,0.1);
+    color: var(--sky); font-size: 0.72rem; font-weight: 500;
+    border-radius: 100px;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy); }
+  #skills .section-title { color: var(--white); }
+
+  .skills-wrap { display: flex; flex-direction: column; gap: 3rem; margin-top: 4rem; }
+
+  .skills-group-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    margin-bottom: 1rem;
+  }
+  .skills-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+  .skill-chip {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px; font-size: 0.82rem; font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    transition: all 0.25s; cursor: default;
+  }
+  .skill-chip:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--gold); color: var(--white);
+  }
+  .skill-chip.tool {
+    border-color: rgba(26,188,156,0.25);
+    color: rgba(26,188,156,0.85);
+  }
+  .skill-chip.tool:hover {
+    background: rgba(26,188,156,0.1);
+    border-color: var(--teal); color: var(--teal);
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--warm); }
+  .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .edu-card {
+    background: var(--white); border-radius: 3px;
+    padding: 2.5rem 2rem; position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.5s, transform 0.5s, box-shadow 0.3s;
+  }
+  .edu-card.visible { opacity: 1; transform: none; }
+  .edu-card:hover { box-shadow: 0 16px 48px rgba(11,32,64,0.12); }
+  .edu-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--navy), var(--sky));
+  }
+  .edu-year {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+  }
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--navy); line-height: 1.4; margin-bottom: 0.5rem;
+  }
+  .edu-school { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
+  .edu-badge {
+    display: inline-block; padding: 0.28rem 0.8rem;
+    background: rgba(11,32,64,0.07); color: var(--navy);
+    font-size: 0.72rem; font-weight: 500;
+    border-radius: 2px; letter-spacing: 0.04em;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications { background: var(--white); }
+  .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .cert-card {
+    display: flex; gap: 1.8rem; align-items: flex-start;
+    padding: 2.5rem; border: 1px solid rgba(11,32,64,0.09);
+    border-radius: 3px; transition: all 0.3s;
+  }
+  .cert-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(212,160,23,0.1);
+    transform: translateY(-4px);
+  }
+  .cert-icon {
+    width: 54px; height: 54px; border-radius: 3px;
+    background: var(--navy); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+  }
+  .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem;
+  }
+  .cert-issuer { font-size: 0.83rem; color: var(--sky); font-weight: 500; margin-bottom: 0.25rem; }
+  .cert-date { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── TOOLS SHOWCASE ── */
+  #tools { background: var(--cream); }
+  .tools-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; }
+  .tool-card {
+    background: var(--white); border-radius: 3px;
+    padding: 2rem 1.5rem; text-align: center;
+    border: 1px solid rgba(11,32,64,0.07);
+    transition: all 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .tool-card.visible { opacity: 1; transform: none; }
+  .tool-card:hover {
+    border-color: var(--teal);
+    box-shadow: 0 8px 32px rgba(26,188,156,0.1);
+    transform: translateY(-6px) !important;
+  }
+  .tool-emoji { font-size: 2rem; margin-bottom: 0.8rem; }
+  .tool-name { font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+  .tool-type { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--navy); text-align: center; padding: 8rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    border: 80px solid rgba(255,255,255,0.02);
+    pointer-events: none;
+  }
+  #contact .section-title { color: var(--white); margin-bottom: 1rem; }
+  #contact p { color: rgba(255,255,255,0.45); font-size: 0.95rem; margin-bottom: 3.5rem; font-weight: 300; }
+
+  .contact-cards { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .contact-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    padding: 1.8rem 2.2rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px; min-width: 180px;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .contact-card:hover {
+    background: rgba(212,160,23,0.1);
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+  .contact-card-icon { font-size: 1.5rem; }
+  .contact-card-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .contact-card-value { font-size: 0.85rem; color: rgba(255,255,255,0.75); font-weight: 400; }
+
+  .lang-row { display: flex; justify-content: center; gap: 1rem; }
+  .lang-pill {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 1.3rem;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 100px;
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+  }
+  .lang-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070f1e; text-align: center;
+    padding: 1.4rem; font-size: 0.75rem;
+    color: rgba(255,255,255,0.2); letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 4rem 2rem 3rem; }
+    .hero-right { padding: 3rem 2rem 4rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
+    #about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+    .about-card { aspect-ratio: 3/2; }
+    .section { padding: 5rem 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    #contact { padding: 5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Oluwatoyin Sangotade</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:toyinsan7@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Customer Support Specialist</span>
+    </div>
+    <h1 class="hero-name">Oluwatoyin<br><em>Sangotade</em></h1>
+    <p class="hero-role">Lagos, Nigeria &nbsp;·&nbsp; Open to Remote &amp; On-site</p>
+    <p class="hero-summary">
+      3+ years turning customer challenges into loyalty-building experiences — across fintech and manufacturing, B2B and B2C, at scale.
+    </p>
+    <div class="hero-actions">
+      <a href="#experience" class="btn btn-gold">View My Work</a>
+      <a href="#contact" class="btn btn-ghost">Let's Connect</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-item">
+      <div class="stat-number">50<sup>+</sup></div>
+      <div class="stat-label">Daily Tickets Resolved</div>
+      <div class="stat-track"><div class="stat-fill" data-w="88"></div></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">95<sup>%</sup></div>
+      <div class="stat-label">CSAT Score Maintained</div>
+      <div class="stat-track"><div class="stat-fill" data-w="95"></div></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">20<sup>%</sup></div>
+      <div class="stat-label">Reduction in Inbound Tickets</div>
+      <div class="stat-track"><div class="stat-fill" data-w="55"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="about-visual">
+    <div class="about-card">
+      <div class="about-card-monogram">OS</div>
+      <div class="about-card-badge">Lagos, Nigeria 🇳🇬</div>
+      <div class="about-card-title">Customer Support<br>Specialist</div>
+    </div>
+    <div class="about-deco"></div>
+    <div class="about-deco2"></div>
+  </div>
+  <div class="about-body">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="section-eyebrow-text">About Me</span>
+      </div>
+      <h2 class="section-title">Empathy-driven support,<br>backed by data.</h2>
+    </div>
+    <p>
+      I'm a Customer Support Specialist with 3+ years of experience delivering end-to-end support across fintech (Payfi) and garment manufacturing (RikkyTrendy). I thrive in high-volume environments where every interaction matters.
+    </p>
+    <p>
+      Proficient in CRM platforms like Freshdesk, Intercom, and Zoho CRM, and collaboration tools including Slack and Microsoft Teams. I bring structure, empathy, and a results-oriented mindset to every customer touchpoint — consistently hitting 95%+ CSAT scores.
+    </p>
+    <div class="about-tags">
+      <span class="about-tag">Multi-channel Support</span>
+      <span class="about-tag">CRM Management</span>
+      <span class="about-tag">B2B Account Handling</span>
+      <span class="about-tag">De-escalation</span>
+      <span class="about-tag">First-Contact Resolution</span>
+      <span class="about-tag">SLA Adherence</span>
+      <span class="about-tag">Harvard Aspire Program</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-line"></div>
+      <span class="section-eyebrow-text">Career Journey</span>
+    </div>
+    <h2 class="section-title">Work Experience</h2>
+  </div>
+
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-side">
+        <div class="exp-period">Jul 2023 – Present</div>
+        <div class="exp-co">RikkyTrendy<br>Garment Factory</div>
+        <div class="exp-industry">Manufacturing</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-main-title">Customer Support Specialist</div>
+        <ul class="exp-bullets">
+          <li>Delivered multi-channel support (phone, email, live chat) for 50+ daily tickets using Freshdesk and Zoho CRM, achieving a consistent 95% CSAT score through empathetic communication and swift issue resolution.</li>
+          <li>Owned end-to-end B2B account support for high-value retail buyers, acting as the primary liaison between clients and the production floor via Slack and Microsoft Teams — maintaining 100% order accuracy.</li>
+          <li>Partnered with the Quality Control (QC) team to investigate and resolve product defect complaints, reducing repeat escalations and improving first-contact resolution rates.</li>
+          <li>Implemented proactive client outreach on manufacturing milestones, cutting inbound status-update tickets by 20% and boosting client satisfaction scores.</li>
+          <li>Utilized CRM software to document interactions, track ticket lifecycles, and surface recurring issues — presenting findings to management to drive process improvements.</li>
+        </ul>
+        <div class="exp-tool-tags">
+          <span class="exp-tool-tag">Freshdesk</span>
+          <span class="exp-tool-tag">Zoho CRM</span>
+          <span class="exp-tool-tag">Slack</span>
+          <span class="exp-tool-tag">Microsoft Teams</span>
+          <span class="exp-tool-tag">B2B</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-side">
+        <div class="exp-period">Aug 2021 – Jun 2023</div>
+        <div class="exp-co">Payfi</div>
+        <div class="exp-industry">Fintech</div>
+      </div>
+      <div class="exp-main">
+        <div class="exp-main-title">Customer Support Specialist</div>
+        <ul class="exp-bullets">
+          <li>Handled high volumes of customer support requests for a fintech platform using Intercom and Zoho CRM, resolving account, transaction, and billing issues with a focus on first-contact resolution and minimal escalation.</li>
+          <li>De-escalated complex customer complaints with empathy and professionalism, contributing directly to improved customer retention and positive brand reputation.</li>
+          <li>Coordinated with internal teams via Slack to resolve cross-functional support issues swiftly, ensuring seamless customer experiences.</li>
+          <li>Maintained detailed CRM records of support tickets, interactions, and resolutions; leveraged data insights to identify recurring issues and recommend workflow improvements.</li>
+          <li>Delivered personalized support solutions tailored to individual customer needs, consistently exceeding SLA targets.</li>
+        </ul>
+        <div class="exp-tool-tags">
+          <span class="exp-tool-tag">Intercom</span>
+          <span class="exp-tool-tag">Zoho CRM</span>
+          <span class="exp-tool-tag">Slack</span>
+          <span class="exp-tool-tag">Fintech</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-line"></div>
+      <span class="section-eyebrow-text">What I Bring</span>
+    </div>
+    <h2 class="section-title">Core Skills &amp; Tools</h2>
+  </div>
+  <div class="skills-wrap">
+    <div>
+      <div class="skills-group-label">Core Competencies</div>
+      <div class="skills-row">
+        <span class="skill-chip">Team Player</span>
+        <span class="skill-chip">Effective Communication</span>
+        <span class="skill-chip">Microsoft Office</span>
+        <span class="skill-chip">Time Management</span>
+        <span class="skill-chip">Customer-Oriented</span>
+        <span class="skill-chip">CRM Software</span>
+        <span class="skill-chip">De-escalation</span>
+        <span class="skill-chip">First-Contact Resolution</span>
+        <span class="skill-chip">SLA Management</span>
+        <span class="skill-chip">B2B Account Management</span>
+      </div>
+    </div>
+    <div>
+      <div class="skills-group-label">Tools &amp; Platforms</div>
+      <div class="skills-row">
+        <span class="skill-chip tool">Freshdesk</span>
+        <span class="skill-chip tool">Intercom</span>
+        <span class="skill-chip tool">Zoho CRM</span>
+        <span class="skill-chip tool">Slack</span>
+        <span class="skill-chip tool">Microsoft Teams</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS SHOWCASE -->
+<section id="tools" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-line"></div>
+      <span class="section-eyebrow-text">Tech Stack</span>
+    </div>
+    <h2 class="section-title">Tools &amp; Platforms</h2>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-emoji">🎧</div>
+      <div class="tool-name">Freshdesk</div>
+      <div class="tool-type">Help Desk · Ticketing</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">💬</div>
+      <div class="tool-name">Intercom</div>
+      <div class="tool-type">Live Chat · Customer Messaging</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">🗂️</div>
+      <div class="tool-name">Zoho CRM</div>
+      <div class="tool-type">CRM · Customer Data</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">⚡</div>
+      <div class="tool-name">Slack</div>
+      <div class="tool-type">Team Collaboration</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-emoji">🤝</div>
+      <div class="tool-name">Microsoft Teams</div>
+      <div class="tool-type">Communication · Meetings</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section" style="background: var(--warm);">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-line"></div>
+      <span class="section-eyebrow-text">Academic Background</span>
+    </div>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2019 – 2021</div>
+      <div class="edu-degree">Higher National Diploma (HND)</div>
+      <div class="edu-school">Mass Communication<br>Osun State Polytechnic, Iree</div>
+      <span class="edu-badge">Upper Credit</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2015 – 2017</div>
+      <div class="edu-degree">Ordinary National Diploma (OND)</div>
+      <div class="edu-school">Mass Communication<br>Osun State Polytechnic, Iree</div>
+      <span class="edu-badge">Upper Credit</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2022 – 2023</div>
+      <div class="edu-degree">National Youth Service Corps</div>
+      <div class="edu-school">Service Certificate<br>NYSC, Nigeria</div>
+      <span class="edu-badge">Completed</span>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="section" style="background: var(--white);">
+  <div class="section-header">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-line"></div>
+      <span class="section-eyebrow-text">Professional Development</span>
+    </div>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🏛️</div>
+      <div>
+        <div class="cert-name">Aspire Leaders Program</div>
+        <div class="cert-issuer">Harvard Business School</div>
+        <div class="cert-date">December 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌍</div>
+      <div>
+        <div class="cert-name">Virtual Assistant Certification</div>
+        <div class="cert-issuer">ALX Africa</div>
+        <div class="cert-date">October 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow" style="justify-content:center; margin-bottom:0.8rem;">
+    <div class="section-eyebrow-line"></div>
+    <span class="section-eyebrow-text">Get In Touch</span>
+    <div class="section-eyebrow-line"></div>
+  </div>
+  <h2 class="section-title">Let's Work Together</h2>
+  <p>Open to new opportunities, collaborations, and conversations.</p>
+  <div class="contact-cards">
+    <a class="contact-card" href="mailto:toyinsan7@gmail.com">
+      <div class="contact-card-icon">✉️</div>
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">toyinsan7@gmail.com</div>
+    </a>
+    <a class="contact-card" href="tel:+2348189884081">
+      <div class="contact-card-icon">📞</div>
+      <div class="contact-card-label">Phone</div>
+      <div class="contact-card-value">08189884081</div>
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/toyin-sangotade" target="_blank">
+      <div class="contact-card-icon">🔗</div>
+      <div class="contact-card-label">LinkedIn</div>
+      <div class="contact-card-value">toyin-sangotade</div>
+    </a>
+  </div>
+  <div class="lang-row">
+    <div class="lang-pill"><div class="lang-dot"></div>English — Expert</div>
+    <div class="lang-pill"><div class="lang-dot"></div>Yoruba — Native</div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Oluwatoyin Sangotade &nbsp;·&nbsp; Customer Support Specialist &nbsp;·&nbsp; Lagos, Nigeria
+</footer>
+
+<script>
+  // Animate stat bars on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.stat-fill').forEach(el => {
+        el.style.width = el.dataset.w + '%';
+      });
+    }, 700);
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.exp-item, .edu-card, .tool-card').forEach((el, i) => {
+    if (el.classList.contains('tool-card') || el.classList.contains('edu-card')) {
+      el.style.transitionDelay = (i % 5) * 0.1 + 's';
+    }
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
